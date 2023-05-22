@@ -1,0 +1,64 @@
+/* overall styling  */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+:root {
+  --buttonDark: rgb(28, 28, 129);
+  --buttonLight: rgb(201, 50, 201);
+}
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.btn {
+  background-color: var(--buttonDark);
+  color: white;
+  border: none;
+  font-size: 1.5rem;
+  border-radius: 8px;
+  padding: 10px 18px;
+}
+.btn:hover {
+  background-color: var(--buttonLight);
+}
+
+/* top navigation  */
+.top-nav ul {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.2rem;
+  margin: 1.5rem 3rem;
+}
+.top-nav ul li {
+  list-style: none;
+}
+#high-scores {
+  cursor: pointer;
+  color: var(--buttonLight);
+}
+#high-scores:hover {
+  opacity: 0.6;
+}
+
+/* start section  */
+.start-sec {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 10rem;
+  align-items: center;
+  width: 60%;
+  margin: 4rem auto;
+}
+.start-sec h1 {
+  font-size: 3rem;
+  text-align: center;
+}
+.start-sec p {
+  font-size: 1.5rem;
+  font-weight: 400;
+  text-align: center;
+  margin: 2rem 0;
+}
