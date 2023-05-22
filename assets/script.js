@@ -9,10 +9,12 @@ const btn1 = document.querySelector("#btn-1");
 const btn2 = document.querySelector("#btn-2");
 const btn3 = document.querySelector("#btn-3");
 const btn4 = document.querySelector("#btn-4");
+const correct = document.querySelector("#correct");
+const wrong = document.querySelector("#wrong");
 
 // set variables
 let timer = 76;
-let gamesRemaining = 6;
+let questionsRemaining = 5;
 let questionNum = 0;
 let buttonsArr = [btn1, btn2, btn3, btn4];
 btn1.classList.remove("btn");
@@ -73,7 +75,7 @@ const questions = [
 function setTimer() {
   const countdownInterval = setInterval(function () {
     timer--;
-    if (timer === 0 || gamesRemaining === 0) {
+    if (timer === 0 || questionsRemaining === 0) {
       clearInterval(countdownInterval);
     }
     timeCountdown.textContent = `Time: ${timer}`;
@@ -99,11 +101,20 @@ function chooseBtn() {
       if (questions[questionNum].answers[i].correct) {
         console.log("true");
         questionNum++;
-
-        getQuestion();
+        wrong.classList.add("hide");
+        correct.classList.remove("hide");
+        questionsRemaining--;
+        // console.log(gamesRemaining);
+        if (questionsRemaining === 0) {
+          endGame();
+        } else {
+          getQuestion();
+        }
       } else {
         console.log("false");
         timer -= 10;
+        correct.classList.add("hide");
+        wrong.classList.remove("hide");
         console.log(timer);
       }
     });
@@ -112,6 +123,9 @@ function chooseBtn() {
 
 chooseBtn();
 
+function endGame() {
+  console.log("game ended");
+}
 startBtn.addEventListener("click", function () {
   setTimer();
   startSec.classList.remove("start-sec");

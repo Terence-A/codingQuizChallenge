@@ -34,7 +34,7 @@ body {
   display: flex;
   justify-content: space-between;
   font-size: 1.2rem;
-  margin: 1.5rem 3rem;
+  margin: 3rem 3rem;
 }
 .top-nav ul li {
   list-style: none;
@@ -88,4 +88,16 @@ body {
 #btn-list {
   display: flex;
   flex-direction: column;
+}
+
+/* verdict section  */
+
+.verdict h3 {
+  border-top: 2px solid rgba(0, 0, 0, 0.479);
+  margin-top: 20rem;
+  width: 50%;
+  margin: 20rem auto 0;
+  padding-top: 1rem;
+  font-size: 2.5rem;
+  color: rgba(0, 0, 0, 0.479);
 }
