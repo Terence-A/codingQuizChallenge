@@ -1,8 +1,11 @@
 // bring over elements
+const startBtn = document.querySelector("#start-btn");
 
 // set variables
 let timer = 76;
 let gamesRemaining = 6;
+let questionNum = 0;
+
 const questions = [
   {
     question: 'How do you write "hello world" to the console?',
@@ -60,7 +63,18 @@ const questions = [
 
 // starts timer and sets first question
 // --- ends when timer reaches 0 or all questions answered
-function render() {}
+function setTimer() {
+  const countdownInterval = setInterval(function () {
+    timer--;
+    if (timer === 0 || gamesRemaining === 0) {
+      clearInterval(countdownInterval);
+    }
+    console.log(timer);
+  }, 1000);
+}
+startBtn.addEventListener("click", function () {
+  setTimer();
+});
 
 // select answer and populate another question
 // ---  if incorrect 10 seconds minus on clock
