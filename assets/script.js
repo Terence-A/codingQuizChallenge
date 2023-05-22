@@ -66,7 +66,7 @@ const questions = [
 function setTimer() {
   const countdownInterval = setInterval(function () {
     timer--;
-    if (timer === 70 || gamesRemaining === 0) {
+    if (timer === 0 || gamesRemaining === 0) {
       clearInterval(countdownInterval);
     }
     console.log(timer);
