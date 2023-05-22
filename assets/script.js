@@ -11,6 +11,10 @@ const btn3 = document.querySelector("#btn-3");
 const btn4 = document.querySelector("#btn-4");
 const correct = document.querySelector("#correct");
 const wrong = document.querySelector("#wrong");
+const endGameScreen = document.querySelector("#end-game");
+const submitBtn = document.querySelector("#submit-btn");
+const inputBox = document.querySelector("#input-box");
+const finalScore = document.querySelector("#final-score");
 
 // set variables
 let timer = 76;
@@ -21,6 +25,8 @@ btn1.classList.remove("btn");
 btn2.classList.remove("btn");
 btn3.classList.remove("btn");
 btn4.classList.remove("btn");
+endGameScreen.classList.add("hide");
+endGameScreen.classList.remove("end-game");
 
 const questions = [
   {
@@ -106,6 +112,7 @@ function chooseBtn() {
         questionsRemaining--;
         // console.log(gamesRemaining);
         if (questionsRemaining === 0) {
+          endGameScreen.classList.add("end-game");
           endGame();
         } else {
           getQuestion();
@@ -124,7 +131,22 @@ function chooseBtn() {
 chooseBtn();
 
 function endGame() {
-  console.log("game ended");
+  finalScore.textContent = `Your final score is ${timer - 1}`;
+  questionHeader.classList.add("hide");
+  btnList.classList.add("hide");
+  btnList.classList.remove("btn-list");
+  btn1.classList.add("hide");
+  btn2.classList.add("hide");
+  btn3.classList.add("hide");
+  btn4.classList.add("hide");
+  correct.classList.remove("correct");
+  correct.classList.add("hide");
+  wrong.classList.remove("wrong");
+  wrong.classList.add("hide");
+  submitBtn.addEventListener("click", function (event) {
+    event.preventDefault();
+    console.log(inputBox.value);
+  });
 }
 startBtn.addEventListener("click", function () {
   setTimer();
