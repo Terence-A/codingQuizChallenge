@@ -5,11 +5,20 @@ const questionSec = document.querySelector("#question-sec");
 const questionHeader = document.querySelector("#question-header");
 const timeCountdown = document.querySelector("#time-countdown");
 const btnList = document.querySelector("#btn-list");
+const btn1 = document.querySelector("#btn-1");
+const btn2 = document.querySelector("#btn-2");
+const btn3 = document.querySelector("#btn-3");
+const btn4 = document.querySelector("#btn-4");
 
 // set variables
 let timer = 76;
 let gamesRemaining = 6;
 let questionNum = 0;
+let buttonsArr = [btn1, btn2, btn3, btn4];
+btn1.classList.remove("btn");
+btn2.classList.remove("btn");
+btn3.classList.remove("btn");
+btn4.classList.remove("btn");
 
 const questions = [
   {
@@ -59,13 +68,6 @@ const questions = [
   },
 ];
 
-// function selectQuestion(numOfQestion, numOfAnswer) {
-//   console.log(questions[numOfQestion].answers[numOfAnswer].correct);
-// }
-
-// selectQuestion(0, 2);
-// console.log(questions[0].answers[2].correct);
-
 // starts timer and sets first question
 // --- ends when timer reaches 0 or all questions answered
 function setTimer() {
@@ -81,23 +83,42 @@ function setTimer() {
 // get question
 // ---  if incorrect 10 seconds minus on clock
 function getQuestion() {
-  // show question
-  questionHeader.textContent = questions[questionNum].question;
-  // get buttons
+  questionHeader.textContent = questions[questionNum].question; //show question
   for (let i = 0; i < questions[questionNum].answers.length; i++) {
-    let quesBtn = document.createElement("li", "button");
-    quesBtn.classList.add("btn", "startSec");
-    quesBtn.textContent = questions[questionNum].answers[i].ans;
-    console.log(quesBtn);
-    console.log(questionNum);
-    btnList.append(quesBtn);
+    buttonsArr[i].textContent = questions[questionNum].answers[i].ans; //get buttons
   }
-  questionNum++;
 }
+
+// choose answer an check
+function chooseBtn() {
+  for (let i = 0; i < buttonsArr.length; i++) {
+    buttonsArr[i].addEventListener("click", function () {
+      // console.log(i + "btn pressed");
+      // console.log(questionNum + "quesnum");
+
+      if (questions[questionNum].answers[i].correct) {
+        console.log("true");
+        questionNum++;
+
+        getQuestion();
+      } else {
+        console.log("false");
+        timer -= 10;
+        console.log(timer);
+      }
+    });
+  }
+}
+
+chooseBtn();
 
 startBtn.addEventListener("click", function () {
   setTimer();
   startSec.classList.remove("start-sec");
+  btn1.classList.add("btn");
+  btn2.classList.add("btn");
+  btn3.classList.add("btn");
+  btn4.classList.add("btn");
   getQuestion();
 });
 
