@@ -1,7 +1,7 @@
 // bring over elements
 const startBtn = document.querySelector("#start-btn");
-const startSec = document.querySelector("#start-sec");
-const questionSec = document.querySelector("#question-sec");
+const startSec = document.querySelector(".start-sec");
+const questionSec = document.querySelector(".question-sec");
 const questionHeader = document.querySelector("#question-header");
 const timeCountdown = document.querySelector("#time-countdown");
 const btnList = document.querySelector("#btn-list");
@@ -11,22 +11,33 @@ const btn3 = document.querySelector("#btn-3");
 const btn4 = document.querySelector("#btn-4");
 const correct = document.querySelector("#correct");
 const wrong = document.querySelector("#wrong");
-const endGameScreen = document.querySelector("#end-game");
+const endGameScreen = document.querySelector(".end-game");
 const submitBtn = document.querySelector("#submit-btn");
 const inputBox = document.querySelector("#input-box");
+const highScoresBtn = document.querySelector("#high-scores");
+const highScoreSec = document.querySelector("#high-score-sec");
+const highScoreContainer = document.querySelector(".high-score-container");
 const finalScore = document.querySelector("#final-score");
+const topNav = document.querySelector("#top-nav");
+const endGameHeader = document.querySelector("#end-game-header");
+const mainSec = document.querySelector("#main-sec");
+const goBackBtn = document.querySelector("#go-back-btn");
 
 // set variables
+
 let timer = 76;
 let questionsRemaining = 5;
 let questionNum = 0;
 let buttonsArr = [btn1, btn2, btn3, btn4];
-btn1.classList.remove("btn");
-btn2.classList.remove("btn");
-btn3.classList.remove("btn");
-btn4.classList.remove("btn");
-endGameScreen.classList.add("hide");
+questionSec.classList.remove("question-sec");
 endGameScreen.classList.remove("end-game");
+
+function resetVariables() {
+  timer = 76;
+  questionsRemaining = 5;
+  questionNum = 0;
+  buttonsArr = [btn1, btn2, btn3, btn4];
+}
 
 const questions = [
   {
@@ -100,12 +111,9 @@ function getQuestion() {
 // choose answer an check
 function chooseBtn() {
   for (let i = 0; i < buttonsArr.length; i++) {
-    buttonsArr[i].addEventListener("click", function () {
-      // console.log(i + "btn pressed");
-      // console.log(questionNum + "quesnum");
-
+    buttonsArr[i].addEventListener("click", function (event) {
+      event.stopPropagation();
       if (questions[questionNum].answers[i].correct) {
-        console.log("true");
         questionNum++;
         wrong.classList.add("hide");
         correct.classList.remove("hide");
@@ -118,11 +126,9 @@ function chooseBtn() {
           getQuestion();
         }
       } else {
-        console.log("false");
         timer -= 10;
         correct.classList.add("hide");
         wrong.classList.remove("hide");
-        console.log(timer);
       }
     });
   }
@@ -131,32 +137,46 @@ function chooseBtn() {
 chooseBtn();
 
 function endGame() {
-  finalScore.textContent = `Your final score is ${timer - 1}`;
-  questionHeader.classList.add("hide");
-  btnList.classList.add("hide");
-  btnList.classList.remove("btn-list");
-  btn1.classList.add("hide");
-  btn2.classList.add("hide");
-  btn3.classList.add("hide");
-  btn4.classList.add("hide");
-  correct.classList.remove("correct");
-  correct.classList.add("hide");
+  questionSec.classList.remove("question-sec");
   wrong.classList.remove("wrong");
   wrong.classList.add("hide");
+  correct.classList.remove("correct");
+  correct.classList.add("hide");
+  finalScore.textContent = `Your final score is ${timer - 1}`;
+
   submitBtn.addEventListener("click", function (event) {
     event.preventDefault();
-    console.log(inputBox.value);
+    event.stopPropagation();
+    highScores();
   });
 }
-startBtn.addEventListener("click", function () {
-  setTimer();
-  startSec.classList.remove("start-sec");
-  btn1.classList.add("btn");
-  btn2.classList.add("btn");
-  btn3.classList.add("btn");
-  btn4.classList.add("btn");
-  getQuestion();
+
+function highScores() {
+  highScoreSec.classList.remove("hide");
+  topNav.classList.add("hide");
+  mainSec.classList.add("hide");
+  goBackBtn.addEventListener("click", function (event) {
+    event.stopPropagation();
+    resetVariables();
+    highScoreSec.classList.add("hide"); // hiding highscore
+    topNav.classList.remove("hide"); //showing nav
+    mainSec.classList.remove("hide");
+    endGameScreen.classList.remove("end-game");
+    startSec.classList.add("start-sec");
+    timeCountdown.textContent = "Time: 0";
+    timer = 75;
+    getQuestion();
+  });
+}
+highScoresBtn.addEventListener("click", function (event) {
+  event.stopPropagation();
+  highScores();
 });
 
-// game over screen
-// able to save initials and score
+startBtn.addEventListener("click", function (event) {
+  event.stopPropagation();
+  questionSec.classList.add("question-sec");
+  startSec.classList.remove("start-sec");
+  setTimer();
+  getQuestion();
+});

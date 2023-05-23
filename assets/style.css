@@ -69,7 +69,7 @@ body {
 }
 
 /* question section  */
-#question-sec {
+.question-sec {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -78,14 +78,14 @@ body {
   height: 10rem;
   width: 50%;
 }
-#question-sec h1 {
+.question-sec h1 {
   font-size: 3rem;
   margin-bottom: 1rem;
 }
-#question-sec ul li {
+.question-sec ul li {
   list-style: none;
 }
-#btn-list {
+.btn-list {
   display: flex;
   flex-direction: column;
 }
@@ -136,4 +136,30 @@ body {
   height: 75%;
   font-size: 90%;
   border-radius: 5px;
+}
+
+/* high score section  */
+.high-score-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 40rem;
+  margin: 10rem auto;
+}
+.high-score-container h5 {
+  font-size: 3em;
+  margin-bottom: 1rem;
+}
+.high-score-container #show-high-scores {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  font-size: 2rem;
+  background-color: lightblue;
+  border-radius: 5px;
+  height: 3rem;
+  width: 50rem;
+  padding-left: 10px;
+  margin-bottom: 1rem;
 }
