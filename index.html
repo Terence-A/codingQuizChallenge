@@ -17,8 +17,9 @@
         </ul>
       </nav>
     </header>
-    <main>
-      <section class="start-sec hide" id="start-sec">
+
+    <main id="main-sec">
+      <section class="start-sec hide">
         <h1 id="header">Coding Quiz Challenge</h1>
         <p>
           Try to answer the following code-related questions within the time
@@ -29,7 +30,8 @@
           <button class="btn" id="start-btn">Start Quiz</button>
         </ul>
       </section>
-      <section id="question-sec" class="hide">
+
+      <section class="hide question-sec">
         <h1 id="question-header"></h1>
         <ul id="btn-list">
           <li id="btn-1" class="btn"><button></button></li>
@@ -38,20 +40,35 @@
           <li id="btn-4" class="btn"><button></button></li>
         </ul>
       </section>
+
       <section class="verdict">
         <h2 id="correct" class="hide">Correct!</h2>
         <h2 id="wrong" class="hide">Wrong!</h2>
       </section>
-      <section class="end-game" id="end-game">
-        <h3>All Done!</h3>
-        <h4 id="final-score">Your final score is</h4>
-        <form action="/">
-          Enter initials
-          <input id="input-box" type="text" />
-          <button class="btn" id="submit-btn">Submit</button>
-        </form>
+
+      <section class="end-game hide">
+        <div id="end-game">
+          <h3 id="end-game-header">All Done!</h3>
+          <h4 id="final-score">Your final score is</h4>
+          <form action="/">
+            Enter initials
+            <input id="input-box" type="text" />
+            <button class="btn" id="submit-btn">Submit</button>
+          </form>
+        </div>
       </section>
     </main>
+
+    <section class="hide" id="high-score-sec">
+      <div class="high-score-container">
+        <h5>High Scores</h5>
+        <p id="show-high-scores">1. TA - 22</p>
+        <div>
+          <button id="go-back-btn" class="btn">Go back</button>
+          <button id="clear-high-scores" class="btn">Clear high scores</button>
+        </div>
+      </div>
+    </section>
 
     <script src="/assets/script.js"></script>
   </body>
