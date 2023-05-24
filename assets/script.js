@@ -165,11 +165,6 @@ function highScores() {
     "userInitials"
   )} - ${localStorage.getItem("userScore")}`;
 
-  clearHighScores.addEventListener("click", function (event) {
-    event.stopPropagation();
-    console.log("clicked");
-  });
-
   goBackBtn.addEventListener("click", function (event) {
     event.stopPropagation();
     resetVariables();
@@ -183,6 +178,11 @@ function highScores() {
     getQuestion();
   });
 }
+clearHighScores.addEventListener("click", function (event) {
+  event.stopPropagation();
+  console.log("clicked");
+});
+
 highScoresBtn.addEventListener("click", function (event) {
   event.stopPropagation();
   highScores();
