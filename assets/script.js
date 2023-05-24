@@ -17,6 +17,8 @@ const inputBox = document.querySelector("#input-box");
 const highScoresBtn = document.querySelector("#high-scores");
 const highScoreSec = document.querySelector("#high-score-sec");
 const highScoreContainer = document.querySelector(".high-score-container");
+const showHighScores = document.querySelector("#show-high-scores");
+const clearHighScores = document.querySelector("#clear-high-scores");
 const finalScore = document.querySelector("#final-score");
 const topNav = document.querySelector("#top-nav");
 const endGameHeader = document.querySelector("#end-game-header");
@@ -29,6 +31,8 @@ let timer = 76;
 let questionsRemaining = 5;
 let questionNum = 0;
 let buttonsArr = [btn1, btn2, btn3, btn4];
+let userInitials = "";
+let userScore = "";
 questionSec.classList.remove("question-sec");
 endGameScreen.classList.remove("end-game");
 
@@ -147,6 +151,8 @@ function endGame() {
   submitBtn.addEventListener("click", function (event) {
     event.preventDefault();
     event.stopPropagation();
+    localStorage.setItem("userInitials", inputBox.value);
+    localStorage.setItem("userScore", timer);
     highScores();
   });
 }
@@ -155,6 +161,15 @@ function highScores() {
   highScoreSec.classList.remove("hide");
   topNav.classList.add("hide");
   mainSec.classList.add("hide");
+  showHighScores.textContent = `1. ${localStorage.getItem(
+    "userInitials"
+  )} - ${localStorage.getItem("userScore")}`;
+
+  clearHighScores.addEventListener("click", function (event) {
+    event.stopPropagation();
+    console.log("clicked");
+  });
+
   goBackBtn.addEventListener("click", function (event) {
     event.stopPropagation();
     resetVariables();
