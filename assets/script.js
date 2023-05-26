@@ -165,19 +165,31 @@ function highScores() {
     "userInitials"
   )} - ${localStorage.getItem("userScore")}`;
 
-  goBackBtn.addEventListener("click", function (event) {
-    event.stopPropagation();
-    resetVariables();
-    highScoreSec.classList.add("hide"); // hiding highscore
-    topNav.classList.remove("hide"); //showing nav
-    mainSec.classList.remove("hide");
-    endGameScreen.classList.remove("end-game");
-    startSec.classList.add("start-sec");
-    timeCountdown.textContent = "Time: 0";
-    timer = 75;
-    getQuestion();
-  });
+  // goBackBtn.addEventListener("click", function (event) {
+  //   event.stopPropagation();
+  //   resetVariables();
+  //   highScoreSec.classList.add("hide"); // hiding highscore
+  //   topNav.classList.remove("hide"); //showing nav
+  //   mainSec.classList.remove("hide");
+  //   endGameScreen.classList.remove("end-game");
+  //   startSec.classList.add("start-sec");
+  //   timeCountdown.textContent = "Time: 0";
+  //   timer = 75;
+  //   getQuestion();
+  // });
 }
+goBackBtn.addEventListener("click", function (event) {
+  event.stopPropagation();
+  resetVariables();
+  highScoreSec.classList.add("hide"); // hiding highscore
+  topNav.classList.remove("hide"); //showing nav
+  mainSec.classList.remove("hide");
+  endGameScreen.classList.remove("end-game");
+  startSec.classList.add("start-sec");
+  timeCountdown.textContent = "Time: 0";
+  timer = 75;
+  getQuestion();
+});
 clearHighScores.addEventListener("click", function (event) {
   event.stopPropagation();
   console.log("clicked");
@@ -185,6 +197,9 @@ clearHighScores.addEventListener("click", function (event) {
 
 highScoresBtn.addEventListener("click", function (event) {
   event.stopPropagation();
+  questionSec.classList.remove("question-sec");
+  correct.classList.add("hide");
+  wrong.classList.add("hide");
   highScores();
 });
 
