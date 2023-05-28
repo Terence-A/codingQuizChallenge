@@ -27,22 +27,26 @@ const goBackBtn = document.querySelector("#go-back-btn");
 
 // set variables
 
-let timer = 76;
+let timer = 75;
 let questionsRemaining = 5;
 let questionNum = 0;
 let buttonsArr = [btn1, btn2, btn3, btn4];
 let userInitials = "";
 let userScore = "";
+showHighScores.textContent = `1. ${localStorage.getItem(
+  "userInitials"
+)} - ${localStorage.getItem("userScore")}`;
 questionSec.classList.remove("question-sec");
 endGameScreen.classList.remove("end-game");
 
 function resetVariables() {
-  timer = 76;
+  timer = 75;
   questionsRemaining = 5;
   questionNum = 0;
   buttonsArr = [btn1, btn2, btn3, btn4];
 }
 
+// quiz questions and possible answers
 const questions = [
   {
     question: 'How do you write "hello world" to the console?',
@@ -96,8 +100,10 @@ const questions = [
 function setTimer() {
   const countdownInterval = setInterval(function () {
     timer--;
-    if (timer === 0 || questionsRemaining === 0) {
+    if (timer <= 0 || questionsRemaining === 0) {
       clearInterval(countdownInterval);
+      endGameScreen.classList.add("end-game");
+      endGame();
     }
     timeCountdown.textContent = `Time: ${timer}`;
   }, 1000);
@@ -111,102 +117,104 @@ function getQuestion() {
     buttonsArr[i].textContent = questions[questionNum].answers[i].ans; //get buttons
   }
 }
-
-// choose answer an check
+// choose answer an check quiz starts here
 function chooseBtn() {
   for (let i = 0; i < buttonsArr.length; i++) {
-    buttonsArr[i].addEventListener("click", function (event) {
-      event.stopPropagation();
+    buttonsArr[i].addEventListener("click", function () {
       if (questions[questionNum].answers[i].correct) {
         questionNum++;
         wrong.classList.add("hide");
         correct.classList.remove("hide");
         questionsRemaining--;
-        // console.log(gamesRemaining);
-        if (questionsRemaining === 0) {
-          endGameScreen.classList.add("end-game");
-          endGame();
-        } else {
-          getQuestion();
-        }
       } else {
         timer -= 10;
         correct.classList.add("hide");
         wrong.classList.remove("hide");
       }
+      // console.log(gamesRemaining);
+      if (questionsRemaining === 0) {
+        endGameScreen.classList.add("end-game");
+        endGame();
+      } else {
+        getQuestion();
+      }
     });
   }
 }
-
 chooseBtn();
-
+// all done page (enter initials)
 function endGame() {
   questionSec.classList.remove("question-sec");
   wrong.classList.remove("wrong");
   wrong.classList.add("hide");
   correct.classList.remove("correct");
   correct.classList.add("hide");
-  finalScore.textContent = `Your final score is ${timer - 1}`;
+  finalScore.textContent = `Your final score is ${timer}`;
 
   submitBtn.addEventListener("click", function (event) {
     event.preventDefault();
     event.stopPropagation();
     localStorage.setItem("userInitials", inputBox.value);
     localStorage.setItem("userScore", timer);
+    showHighScores.textContent = "0";
     highScores();
   });
 }
 
+// high scores page
 function highScores() {
   highScoreSec.classList.remove("hide");
   topNav.classList.add("hide");
   mainSec.classList.add("hide");
-  showHighScores.textContent = `1. ${localStorage.getItem(
-    "userInitials"
-  )} - ${localStorage.getItem("userScore")}`;
-
-  // goBackBtn.addEventListener("click", function (event) {
-  //   event.stopPropagation();
-  //   resetVariables();
-  //   highScoreSec.classList.add("hide"); // hiding highscore
-  //   topNav.classList.remove("hide"); //showing nav
-  //   mainSec.classList.remove("hide");
-  //   endGameScreen.classList.remove("end-game");
-  //   startSec.classList.add("start-sec");
-  //   timeCountdown.textContent = "Time: 0";
-  //   timer = 75;
-  //   getQuestion();
-  // });
+  if (
+    showHighScores.textContent == "1. null - null" ||
+    showHighScores.textContent === "No High Scores!" ||
+    showHighScores.textContent === ""
+  ) {
+    console.log("true");
+    showHighScores.textContent = "No High Scores!";
+  } else {
+    showHighScores.textContent = `1. ${localStorage.getItem(
+      "userInitials"
+    )} - ${localStorage.getItem("userScore")}`;
+  }
 }
-goBackBtn.addEventListener("click", function (event) {
-  event.stopPropagation();
+
+// go back button
+goBackBtn.addEventListener("click", function () {
   resetVariables();
   highScoreSec.classList.add("hide"); // hiding highscore
   topNav.classList.remove("hide"); //showing nav
   mainSec.classList.remove("hide");
   endGameScreen.classList.remove("end-game");
   startSec.classList.add("start-sec");
-  timeCountdown.textContent = "Time: 0";
-  timer = 75;
-  getQuestion();
-});
-clearHighScores.addEventListener("click", function (event) {
-  event.stopPropagation();
-  console.log("clicked");
+  timeCountdown.textContent = `Time: ${timer}`;
+  // clearInterval(countdownInterval);
+  // getQuestion();
 });
 
-highScoresBtn.addEventListener("click", function (event) {
+// clear high scores button
+clearHighScores.addEventListener("click", function (event) {
   event.stopPropagation();
+  localStorage.removeItem("userInitials");
+  localStorage.removeItem("userScore");
+  showHighScores.textContent = "";
+});
+
+// view high scores button
+highScoresBtn.addEventListener("click", function () {
   questionSec.classList.remove("question-sec");
   correct.classList.add("hide");
   wrong.classList.add("hide");
   highScores();
 });
 
+// start button at beginning
 startBtn.addEventListener("click", function (event) {
-  event.stopPropagation();
+  // event.stopPropagation();
+  resetVariables();
   questionSec.classList.add("question-sec");
   startSec.classList.remove("start-sec");
-  setTimer();
   getQuestion();
+  setTimer();
 });
