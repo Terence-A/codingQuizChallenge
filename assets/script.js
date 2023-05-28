@@ -33,6 +33,7 @@ let questionNum = 0;
 let buttonsArr = [btn1, btn2, btn3, btn4];
 let userInitials = "";
 let userScore = "";
+let countdownInterval;
 showHighScores.textContent = `1. ${localStorage.getItem(
   "userInitials"
 )} - ${localStorage.getItem("userScore")}`;
@@ -98,7 +99,7 @@ const questions = [
 // starts timer and sets first question
 // --- ends when timer reaches 0 or all questions answered
 function setTimer() {
-  const countdownInterval = setInterval(function () {
+  countdownInterval = setInterval(function () {
     timer--;
     if (timer <= 0 || questionsRemaining === 0) {
       clearInterval(countdownInterval);
@@ -206,6 +207,7 @@ highScoresBtn.addEventListener("click", function () {
   questionSec.classList.remove("question-sec");
   correct.classList.add("hide");
   wrong.classList.add("hide");
+  clearInterval(countdownInterval);
   highScores();
 });
 
