@@ -1,4 +1,4 @@
-# Quiz Challenge
+# JavaScript Quiz Challenge
 
 ## Description
 
