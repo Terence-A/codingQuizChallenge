@@ -13,6 +13,6 @@
 ![image](https://github.com/Terence-A/codingQuizChallenge/assets/90189211/bd0338c3-2a8f-455d-9be8-30476181b228)
 ![image](https://github.com/Terence-A/codingQuizChallenge/assets/90189211/504c1f82-8a1d-46b1-8769-67584088d756)
 
-
-
 ## Github Page
+
+https://terence-a.github.io/codingQuizChallenge/
