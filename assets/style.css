@@ -98,7 +98,7 @@ body {
   border-top: 2px solid rgba(0, 0, 0, 0.479);
   margin-top: 20rem;
   width: 50%;
-  margin: 10em auto 0;
+  margin: 7em auto 0;
   padding-top: 1rem;
   font-size: 2.5rem;
   color: rgba(0, 0, 0, 0.479);
@@ -179,6 +179,15 @@ body {
     padding-left: 10px;
     margin-bottom: 1rem;
   }
+  .verdict h2 {
+    margin-top: 8.7em;
+  }
+}
+
+@media only screen and (max-width: 806px) {
+  .verdict h2 {
+    margin-top: 10em;
+  }
 }
 
 @media only screen and (max-width: 751px) {
@@ -187,8 +196,8 @@ body {
     margin-bottom: 1rem;
   }
   .verdict h2 {
-    margin-top: 20rem;
-    margin: 11em auto 0;
+    margin-top: 4.6em;
+
     padding-top: 1rem;
   }
   .end-game {
@@ -212,5 +221,23 @@ body {
   }
   .high-score-container #show-high-scores {
     width: 25rem;
+  }
+  .btn {
+    font-size: 1rem;
+  }
+  @media only screen and (max-width: 670px) {
+    .verdict h2 {
+      margin-top: 6em;
+    }
+  }
+  @media only screen and (max-width: 469px) {
+    .verdict h2 {
+      margin-top: 7em;
+    }
+  }
+  @media only screen and (max-width: 375px) {
+    .verdict h2 {
+      margin-top: 9em;
+    }
   }
 }
